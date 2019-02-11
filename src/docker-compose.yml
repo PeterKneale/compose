@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+
+  products.tests:
+    image: products.tests
+    build:
+      context: Products.Tests
+      dockerfile: Dockerfile
+    depends_on:
+      - products.api
+
+  products.api:
+    image: products.api
+    build:
+      context: Products.Api
+      dockerfile: Dockerfile    
+    depends_on:
+      - products.db
+
+  products.db:
+    image: microsoft/mssql-server-linux:latest

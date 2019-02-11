@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  products.tests:
+    environment:
+      - ConnectionString=Server=products.db;Database=Products;User Id=sa;Password=Pass@word
+
+  products.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionString=Server=products.db;Database=Products;User Id=sa;Password=Pass@word
+    ports:
+      - "5080:80"
+
+  products.db:
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "51433:1433"
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Pass@word' -Q 'SELECT GetDate()'
