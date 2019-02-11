@@ -21,3 +21,10 @@ services:
       - "51433:1433"
     healthcheck:
       test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Pass@word' -Q 'SELECT GetDate()'
+      
+  browser:
+    environment:
+      - DEBUG=browserless/chrome
+      - MAX_CONCURRENT_SESSIONS=10
+    ports:
+      - "3000:3000"

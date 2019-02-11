@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - products.api
+      - browser
 
   products.api:
     image: products.api
@@ -19,3 +20,6 @@ services:
 
   products.db:
     image: microsoft/mssql-server-linux:latest
+
+  browser:
+    image: selenium/standalone-chrome
